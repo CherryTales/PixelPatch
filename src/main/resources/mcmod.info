@@ -1,0 +1,19 @@
+[
+  {
+    "modid": "pixelpatch",
+    "name": "PixelPatch",
+    "description": "Pixel Patch on Minecraft Forge 1.8.9",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "https://github.com/CherryTales/PixelPatch",
+    "updateUrl": "https://github.com/CherryTales/PixelPatch",
+    "authorList": [
+      "TreyRuffy",
+      "DownloadableFox",
+      "CherryTales"
+    ],
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": []
+  }
+]

@@ -1,0 +1,11 @@
+{
+  "package": "com.cherrytales.pixelpatch.mixins",
+  "refmap": "pixelpatch.mixins.refmap.json",
+  "minVersion": "0.7.11",
+  "compatibilityLevel": "JAVA_8",
+  "overwrites": {
+    "conformVisibility": true
+  },
+  "client": [
+  ]
+}
