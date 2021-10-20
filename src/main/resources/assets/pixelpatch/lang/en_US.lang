@@ -1,0 +1,3 @@
+pixelpatch.command.onlyOnHypixel=This command can only be executed on Hypixel
+pixelpatch.commands.blinder.usage=/blinder <show|hide> <player>
+pixelpatch.commands.blinder.playersOnly=Only players can use the /blinder command
