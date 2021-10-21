@@ -1,3 +1,7 @@
 pixelpatch.command.onlyOnHypixel=This command can only be executed on Hypixel
 pixelpatch.commands.blinder.usage=/blinder <show|hide> <player>
 pixelpatch.commands.blinder.playersOnly=Only players can use the /blinder command
+pixelpatch.commands.blinder.hidePlayer=%d can no longer be seen
+pixelpatch.commands.blinder.shownPlayer=%d can now be seen
+pixelpatch.commands.blinder.alreadyHiddenPlayer=%d is already hidden
+pixelpatch.commands.blinder.alreadyShownPlayer=%d is already shown

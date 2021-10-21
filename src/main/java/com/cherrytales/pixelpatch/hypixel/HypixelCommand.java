@@ -57,7 +57,8 @@ public abstract class HypixelCommand extends CommandBase {
     public boolean onHypixel(final ICommandSender sender) {
         if (sender instanceof EntityPlayer && !Minecraft.getMinecraft().isIntegratedServerRunning()) {
             for (final String ip : PixelPatchForge.HYPIXEL_SERVER_IPS) {
-                if (Minecraft.getMinecraft().getCurrentServerData().serverIP.endsWith(ip)) {
+                if (Minecraft.getMinecraft().getCurrentServerData().serverIP.toLowerCase().endsWith("." + ip.toLowerCase()) ||
+                        Minecraft.getMinecraft().getCurrentServerData().serverIP.equalsIgnoreCase(ip)) {
                     return true;
                 }
             }

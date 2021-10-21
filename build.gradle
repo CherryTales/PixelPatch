@@ -4,7 +4,6 @@ buildscript {
         maven { url "https://files.minecraftforge.net/maven" }
         maven { url "https://jitpack.io/" }
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-        maven { url "https://repo.sk1er.club/repository/maven-public" }
     }
     dependencies {
         classpath('com.github.ReplayMod:ForgeGradle:48c4f0c6c7:all')
@@ -29,7 +28,8 @@ version = "1.0.0"
 group = "com.cherrytales.pixelpatch"
 archivesBaseName = "PixelPatch"
 
-sourceCompatibility = targetCompatibility = 1.8
+sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility =
+        targetCompatibility = '1.8'
 compileJava.options.encoding = 'UTF-8'
 
 minecraft {
@@ -41,17 +41,17 @@ minecraft {
     clientRunArgs += ["--mixin patcher.mixins.json"]
 }
 
-mixin {
-    add sourceSets.main, "pixelpatch.mixins.refmap.json"
-}
-
-dependencies {
-    annotationProcessor 'org.spongepowered:mixin:0.7.11-SNAPSHOT'
-}
-
 configurations {
     embed
     implementation.extendsFrom(embed)
+}
+
+dependencies {
+    embed ('org.spongepowered:mixin:0.7.11-SNAPSHOT') {
+        exclude module: 'guava'
+        exclude module: 'commons-io'
+        exclude module: 'gson'
+    }
 }
 
 processResources {
@@ -69,12 +69,22 @@ processResources {
 }
 
 jar {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    dependsOn configurations.embed
+    from {
+        configurations.embed.collect { it.isDirectory() ? it : zipTree(it) }
+    } {
+        exclude "LICENSE.txt", "META-INF/MANIFSET.MF", "META-INF/maven/**", "META-INF/*.RSA", "META-INF/*.SF"
+    }
+
     exclude 'META-INF/*.RSA', 'META-INF/*.SF', 'META-INF/*.DSA'
     manifest {
         attributes "ModSide": "CLIENT",
-                "FMLCorePluginContainsFMLMod": "Yes, yes it does",
+                "FMLCorePluginContainsFMLMod": "true",
                 "TweakOrder": "0",
-                "MixinConfigs": "pixelpatch.mixins.json"
+                "MixinConfigs": "pixelpatch.mixins.json",
+                "TweakClass": "org.spongepowered.asm.launch.MixinTweaker",
+                "ForceLoadAsMod": "true"
     }
 }
 

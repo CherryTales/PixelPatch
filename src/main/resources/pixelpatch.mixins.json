@@ -7,5 +7,6 @@
     "conformVisibility": true
   },
   "client": [
+    "MixinRenderManager"
   ]
 }

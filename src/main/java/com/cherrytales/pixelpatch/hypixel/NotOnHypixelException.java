@@ -5,6 +5,7 @@ import net.minecraft.command.CommandException;
 /**
  * Exception for if the player is not on Hypixel.
  */
+@SuppressWarnings("serial")
 public class NotOnHypixelException extends CommandException {
 
     /**
