@@ -1,6 +1,7 @@
 package com.cherrytales.pixelpatch.mixins;
 
 import com.cherrytales.pixelpatch.blinder.HiddenPlayers;
+import net.minecraft.client.entity.EntityOtherPlayerMP;
 import net.minecraft.client.renderer.culling.ICamera;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
@@ -25,10 +26,10 @@ public class MixinRenderManager {
      * @param camZ the camera's z coordinate
      * @param cir the callback info
      */
-    @Inject(method = "shouldRender", at = @At("HEAD"))
+    @Inject(method = "shouldRender", at = @At("HEAD"), cancellable = true)
     public void shouldRender(final Entity entityIn, final ICamera camera, final double camX, final double camY,
                              final double camZ, final CallbackInfoReturnable<Boolean> cir) {
-        if (HiddenPlayers.checkPlayer(entityIn.getName())) {
+        if (entityIn instanceof EntityOtherPlayerMP && HiddenPlayers.checkPlayer(((EntityOtherPlayerMP) entityIn).getGameProfile())) {
             cir.setReturnValue(false);
         }
     }

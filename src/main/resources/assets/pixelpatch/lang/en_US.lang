@@ -5,3 +5,4 @@ pixelpatch.commands.blinder.hidePlayer=%d can no longer be seen
 pixelpatch.commands.blinder.shownPlayer=%d can now be seen
 pixelpatch.commands.blinder.alreadyHiddenPlayer=%d is already hidden
 pixelpatch.commands.blinder.alreadyShownPlayer=%d is already shown
+pixelpatch.commands.blinder.cannotFindPlayer=%d is not a valid player

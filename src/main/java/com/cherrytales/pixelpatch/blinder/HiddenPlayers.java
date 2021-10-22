@@ -1,5 +1,6 @@
 package com.cherrytales.pixelpatch.blinder;
 
+import com.mojang.authlib.GameProfile;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,15 +13,15 @@ public final class HiddenPlayers {
         // Do nothing
     }
 
-    private static final List<String> hiddenPlayersList = new ArrayList<>();
+    private static final List<GameProfile> hiddenPlayersList = new ArrayList<>();
 
     /**
      * Adds a player to the hidden list.
      *
      * @param otherPlayer the player to hide
      */
-    public static void addHiddenPlayer(final String otherPlayer) {
-        hiddenPlayersList.add(otherPlayer.toLowerCase());
+    public static void addHiddenPlayer(final GameProfile otherPlayer) {
+        hiddenPlayersList.add(otherPlayer);
     }
 
     /**
@@ -28,8 +29,8 @@ public final class HiddenPlayers {
      *
      * @param otherPlayer the player to reveal
      */
-    public static void removeHiddenPlayer(final String otherPlayer) {
-        hiddenPlayersList.remove(otherPlayer.toLowerCase());
+    public static void removeHiddenPlayer(final GameProfile otherPlayer) {
+        hiddenPlayersList.remove(otherPlayer);
     }
 
     /**
@@ -38,8 +39,8 @@ public final class HiddenPlayers {
      * @param otherPlayer the player to check
      * @return {@code true} if the player should be hidden
      */
-    public static boolean checkPlayer(final String otherPlayer) {
-        return hiddenPlayersList.contains(otherPlayer.toLowerCase());
+    public static boolean checkPlayer(final GameProfile otherPlayer) {
+        return hiddenPlayersList.contains(otherPlayer);
     }
 
     /**
@@ -47,7 +48,7 @@ public final class HiddenPlayers {
      *
      * @return the hidden player list
      */
-    public static List<String> hiddenPlayers() {
+    public static List<GameProfile> hiddenPlayers() {
         return hiddenPlayersList;
     }
 }

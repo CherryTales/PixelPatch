@@ -37,8 +37,8 @@ minecraft {
     runDir = "run"
     mappings = "stable_22"
     makeObfSourceJar = false
-    clientJvmArgs += ["-Dpatcher.debugBytecode=true", "-Dmixin.debug.verbose=true", "-Dmixin.debug.export=true", "-Dmixin.dumpTargetOnFailure=true"]
-    clientRunArgs += ["--mixin patcher.mixins.json"]
+    clientJvmArgs += ["-Dmixin.debug.verbose=true", "-Dmixin.debug.export=true", "-Dmixin.dumpTargetOnFailure=true"]
+    clientRunArgs += ["--mixin pixelpatch.mixins.json"]
 }
 
 configurations {
@@ -47,11 +47,12 @@ configurations {
 }
 
 dependencies {
-    embed ('org.spongepowered:mixin:0.7.11-SNAPSHOT') {
+    embed('org.spongepowered:mixin:0.7.11-SNAPSHOT') {
         exclude module: 'guava'
         exclude module: 'commons-io'
         exclude module: 'gson'
     }
+    annotationProcessor('org.spongepowered:mixin:0.7.11-SNAPSHOT')
 }
 
 processResources {
@@ -66,6 +67,10 @@ processResources {
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
+}
+
+mixin {
+    add sourceSets.main, "pixelpatch.mixins.refmap.json"
 }
 
 jar {
@@ -86,6 +91,10 @@ jar {
                 "TweakClass": "org.spongepowered.asm.launch.MixinTweaker",
                 "ForceLoadAsMod": "true"
     }
+}
+
+compileJava {
+    options.compilerArgs +=	"-Xlint:-processing" // Fixes "no processor claimed any of these annotations" warning
 }
 
 blossom {
