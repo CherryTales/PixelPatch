@@ -29,6 +29,7 @@ public class MixinRenderManager {
     @Inject(method = "shouldRender", at = @At("HEAD"), cancellable = true)
     public void shouldRender(final Entity entityIn, final ICamera camera, final double camX, final double camY,
                              final double camZ, final CallbackInfoReturnable<Boolean> cir) {
+        // Stops another player from rendering if they are on the Hidden Players list.
         if (entityIn instanceof EntityOtherPlayerMP && HiddenPlayers.checkPlayer(((EntityOtherPlayerMP) entityIn).getGameProfile())) {
             cir.setReturnValue(false);
         }

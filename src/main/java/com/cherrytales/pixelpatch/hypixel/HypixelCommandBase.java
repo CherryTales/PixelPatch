@@ -1,8 +1,8 @@
 package com.cherrytales.pixelpatch.hypixel;
 
 import com.cherrytales.pixelpatch.PixelPatchForge;
+import com.cherrytales.pixelpatch.utilities.PixelPatchCommandBase;
 import net.minecraft.client.Minecraft;
-import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,31 +10,7 @@ import net.minecraft.entity.player.EntityPlayer;
 /**
  * Commands which can only be used on Hypixel.
  */
-public abstract class HypixelCommand extends CommandBase {
-
-    @Override
-    public int getRequiredPermissionLevel() {
-        return 0;
-    }
-
-    /**
-     * Gets the usage string for the command.
-     *
-     * @param sender the command sender
-     */
-    @Override
-    public String getCommandUsage(final ICommandSender sender) {
-        return "pixelpatch.commands." + getCommandName() + ".usage";
-    }
-
-    /**
-     * Lets you create a command.
-     *
-     * @param sender the command sender
-     * @param args the command arguments
-     * @throws CommandException command exception
-     */
-    public abstract void processCommand(final ICommandSender sender, final String[] args) throws CommandException;
+public abstract class HypixelCommandBase extends PixelPatchCommandBase {
 
     /**
      * Ensures the command sender is on Hypixel before commands are executed.
@@ -65,4 +41,5 @@ public abstract class HypixelCommand extends CommandBase {
         }
         return false;
     }
+
 }

@@ -1,12 +1,10 @@
 package com.cherrytales.pixelpatch.blinder;
 
-import com.cherrytales.pixelpatch.hypixel.HypixelCommand;
+import com.cherrytales.pixelpatch.hypixel.HypixelCommandBase;
 import com.mojang.authlib.GameProfile;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.network.NetworkPlayerInfo;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
@@ -18,7 +16,7 @@ import net.minecraft.util.EnumChatFormatting;
 /**
  * The blinder command.
  */
-public class CommandBlinder extends HypixelCommand {
+public class CommandBlinder extends HypixelCommandBase {
 
     /**
      * Gets the name of the command.
@@ -94,18 +92,7 @@ public class CommandBlinder extends HypixelCommand {
                 return getListOfStringsMatchingLastWord(args, "show", "hide");
             } else if (args.length == 2) {
                 if ("hide".equalsIgnoreCase(args[0])) {
-                    final Collection<NetworkPlayerInfo> playerInfoMap = Minecraft.getMinecraft().getNetHandler().getPlayerInfoMap();
-                    final List<String> playerNames = new ArrayList<>();
-                    for (final NetworkPlayerInfo playerInfo : playerInfoMap) {
-                        if (playerInfo != null) {
-                            // Regex checks that the name is a valid username
-                            if (playerInfo.getGameProfile().getName().matches("^[a-zA-Z0-9_]{2,16}$") &&
-                                !playerInfo.getGameProfile().getName().equalsIgnoreCase(sender.getName())) {
-                                playerNames.add(playerInfo.getGameProfile().getName());
-                            }
-                        }
-                    }
-                    return getListOfStringsMatchingLastWord(args, playerNames);
+                    return getListOfStringsMatchingLastWord(args, allPlayerNames(sender.getName()));
                 } else if ("show".equalsIgnoreCase(args[0])) {
                     // Outputs the hidden players list
                     final List<String> hiddenPlayerNames = new ArrayList<>();
