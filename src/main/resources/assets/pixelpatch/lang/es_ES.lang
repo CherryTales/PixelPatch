@@ -1,0 +1,8 @@
+pixelpatch.command.onlyOnHypixel=Este comando solo funciona dentro del servidor Hypixel
+pixelpatch.commands.blinder.usage=/blinder <show|hide> <jugador>
+pixelpatch.commands.blinder.playersOnly=Solamente los jugadores pueden utilizar este comando!
+pixelpatch.commands.blinder.hidePlayer=%d ahora esta oculto
+pixelpatch.commands.blinder.shownPlayer=%d ahora es visible
+pixelpatch.commands.blinder.alreadyHiddenPlayer=%d ya esta oculto
+pixelpatch.commands.blinder.alreadyShownPlayer=%d ya es visible
+pixelpatch.commands.blinder.cannotFindPlayer=%d no es un jugador valido!

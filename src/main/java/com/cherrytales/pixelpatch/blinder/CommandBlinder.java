@@ -43,16 +43,19 @@ public class CommandBlinder extends HypixelCommand {
             if (!(sender instanceof EntityPlayer)) {
                 throw new CommandException("pixelpatch.commands.blinder.playersOnly");
             } else {
+                if (Minecraft.getMinecraft().getNetHandler().getPlayerInfo(args[1]) == null) {
+                    throw new CommandException("pixelpatch.commands.blinder.cannotFindPlayer", args[1]);
+                }
                 final GameProfile entityPlayer =
                     Minecraft.getMinecraft().getNetHandler().getPlayerInfo(args[1]).getGameProfile();
-                if (entityPlayer == null || entityPlayer.equals(((EntityPlayer) sender).getGameProfile())) {
-                    throw new CommandException("pixelpatch.commands.blinder.cannotFindPlayer");
+                if (entityPlayer == null || entityPlayer.equals(((EntityPlayer) sender).getGameProfile()) ) {
+                    throw new CommandException("pixelpatch.commands.blinder.cannotFindPlayer", args[1]);
                 } else {
                     if ("show".equalsIgnoreCase(args[0])) {
                         if (!HiddenPlayers.checkPlayer(entityPlayer)) {
                             final ChatComponentTranslation playerAlreadyShown = new ChatComponentTranslation(
                                 "pixelpatch.commands.blinder.alreadyShownPlayer", entityPlayer.getName());
-                            playerAlreadyShown.getChatStyle().setColor(EnumChatFormatting.GREEN);
+                            playerAlreadyShown.getChatStyle().setColor(EnumChatFormatting.RED);
                             sender.addChatMessage(playerAlreadyShown);
                         } else {
                             HiddenPlayers.removeHiddenPlayer(entityPlayer);
@@ -66,7 +69,7 @@ public class CommandBlinder extends HypixelCommand {
                         if (HiddenPlayers.checkPlayer(entityPlayer)) {
                             final ChatComponentTranslation playerAlreadyHidden = new ChatComponentTranslation(
                                 "pixelpatch.commands.blinder.alreadyHiddenPlayer", entityPlayer.getName());
-                            playerAlreadyHidden.getChatStyle().setColor(EnumChatFormatting.GREEN);
+                            playerAlreadyHidden.getChatStyle().setColor(EnumChatFormatting.RED);
                             sender.addChatMessage(playerAlreadyHidden);
                         } else {
                             HiddenPlayers.addHiddenPlayer(entityPlayer);
